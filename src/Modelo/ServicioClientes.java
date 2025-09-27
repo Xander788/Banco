@@ -22,11 +22,12 @@ public class ServicioClientes {
         this.gestor = gestor;
     }
     
-    public void guardar(String id, String nombre, String correo, String telefono) {
+    public void guardar(String id, String nombre, String correo, String telefono, Boolean preferente) {
         validarRequeridos(id, nombre, correo, telefono);
         if (gestor.existe(id)) throw new IllegalArgumentException("Ya existe un registro con id=" + id);
         if (!EMAIL.matcher(correo).matches()) throw new IllegalArgumentException("Formato de correo inválido");
-        gestor.guardar(new Cliente(id, nombre, correo, telefono));
+        String nombreFormateado = formatearNombrePropio(nombre);
+        gestor.guardar(new Cliente(id, nombreFormateado, correo, telefono, preferente));
     }
     
     public void actualizar(String id, String correo, String telefono) {
@@ -80,4 +81,18 @@ public class ServicioClientes {
         validarRequeridos(correo,telefono);
         return !(cliente.getCorreo().equals(correo) && cliente.getTelefono().equals(telefono));
     }
+    
+    private String formatearNombrePropio(String nombre) {
+    String[] partes = nombre.trim().toLowerCase().split("\\s+");
+    StringBuilder resultado = new StringBuilder();
+    for (String parte : partes) {
+        if (!parte.isEmpty()) {
+            resultado.append(Character.toUpperCase(parte.charAt(0)))
+                     .append(parte.substring(1))
+                     .append(" ");
+        }
+    }
+    return resultado.toString().trim();
+}
+
 }

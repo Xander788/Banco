@@ -20,9 +20,9 @@ public class ControladorClientes {
         this.vista = vista;
     }
     
-    public void guardar(String id,String nombre,String correo, String telefono){
+    public void guardar(String id,String nombre,String correo, String telefono, Boolean preferente){
         try{
-            servicio.guardar(id,nombre,correo, telefono);
+            servicio.guardar(id,nombre,correo, telefono, preferente);
             vista.deshabilitarCampos();
             vista.mostrarMensaje("El registro se agrego correctamente", "Registro exitoso");
         }catch(Exception ex){
