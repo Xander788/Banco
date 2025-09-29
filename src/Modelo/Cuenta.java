@@ -14,6 +14,17 @@ public class Cuenta {
     private double saldo;
     private Moneda moneda;
 
+    private String titular;
+    private Estado estados;
+
+    public String getTitular() {
+        return titular;
+    }
+
+    public Estado getEstados() {
+        return estados;
+    }
+
     public String getNumeroCuenta() {
         return numeroCuenta;
     }
