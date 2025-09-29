@@ -13,7 +13,6 @@ public class Cuenta {
     private String numeroCuenta; //por ejemplo el bcr es crc pa que no digan nadota
     private double saldo;
     private Moneda moneda;
-
     private String titular;
     private Estado estados;
 
@@ -56,7 +55,14 @@ public class Cuenta {
         }
         return false;
     }
-
+    
+public boolean transferir(Cuenta destino, double monto) {
+    if (this.retirar(monto)) {  
+        destino.depositar(monto); 
+        return true;
+    }
+    return false;
+}
     @Override
     public String toString() {
         return "Cuenta{" + "numeroCuenta=" + numeroCuenta + ", saldo=" + saldo + ", moneda=" + moneda + '}';
